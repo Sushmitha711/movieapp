@@ -1,0 +1,14 @@
+.btnSide{
+    width: 100%;
+}
+@media (max-width:700px){
+    .btnSide{
+        padding-top: 90px;
+    } 
+    .btn{
+        font-size: 3vh;
+    }
+    .mainIntro{
+        font-size: 3vh;
+    }
+  }

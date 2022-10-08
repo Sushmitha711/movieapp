@@ -1,24 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import Intro from "./components/Intro";
+ import "./App.css";
+import Layout from "./components/Layout";
+import Headers from './components/Header/Header'
+import useApiCalls from "./Hooks/useApiCalls";
+import { useState, useEffect } from "react";
+import { CharactersProvider } from "./contexts/casts";
+import { Container } from "@material-ui/core";
 
 function App() {
+  // setting up neccessary states
+  // calling the custom hook to load up dropdown contents
+  const { dataRecieved, loading, errorMsg } = useApiCalls();
+  const [movieSelected, setMovieSelected] = useState("");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+        <Headers/>
+    <CharactersProvider>
+      <section className="app">
+        <Container>
+        <Intro
+        errorMsg={errorMsg}
+        loading={loading}
+          setMovieSelected={setMovieSelected}
+          dataRecieved={dataRecieved}
+        />
+        <Layout dataRecieved={dataRecieved} movieSelected={movieSelected} />
+        </Container>
+       
+      </section>
+    </CharactersProvider>
+    </>
   );
 }
 
